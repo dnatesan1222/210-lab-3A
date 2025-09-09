@@ -29,11 +29,23 @@ Restaurant createRestaurant() {
     cout << "Owner's name: ";
     getline(cin, temp.owner);
 
+    int max;
     cout << "Max customer occupancy: ";
-    cin >> temp.maxTotal;
+    while (!(cin >> max)){
+        cout << "Please enter a positive integer.\nMax customer occupancy: ";
+        cin.clear();
+        cin.ignore(10000, '\n');
+    }
+    temp.maxTotal = max; //what if the user input is a negative number
 
+    double rating;
     cout << "Restaurant rating (1.0-5.0 star scale): ";
-    cin >> temp.rating;
+    cin >> rating;
+    while ((rating < 1.0) || (rating > 5.0)){
+        cout << "Error: Please enter a value in the range 1.0-5.0\nRestaurant rating (1.0-5.0 star scale): ";
+        cin >> rating;
+    } 
+    temp.rating = rating;
     cout << endl;
 
     // returns: a Restaurant struct based upon the user's input
